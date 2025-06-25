@@ -1,8 +1,10 @@
 package game_functionalities;
 
-import java.util.Optional;
-import java.util.function.Function;
-
 public interface State {
+
+    abstract boolean canMove();
+    abstract boolean isVulnerable(int x, int y);
+    abstract void arrangeBoard();
+    abstract void movePiece();
 
 }

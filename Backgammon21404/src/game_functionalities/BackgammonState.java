@@ -3,7 +3,7 @@ package game_functionalities;
 import game_objects.Board;
 import game_objects.GameObjectFactory;
 
-public class BackgammonState extends Game implements State{
+public class BackgammonState extends Game implements State {
 
     static BackgammonState INSTANCE;
     static State CURRENTSTATE;
@@ -13,7 +13,7 @@ public class BackgammonState extends Game implements State{
     }
 
     @Override
-    void arrangeBoard() {
+    public void arrangeBoard() {
         Board board = (Board)GameObjectFactory.createInstance("Board");
 
         board.addPiece(true, 11, 0, 2, -1);
@@ -30,7 +30,7 @@ public class BackgammonState extends Game implements State{
     }
 
     @Override
-    void movePiece() {
+    public void movePiece() {
         //todo
     }
 
@@ -41,10 +41,10 @@ public class BackgammonState extends Game implements State{
 
     @Override
     public boolean isVulnerable(int x, int y) {
-        return false;
+        return this.getBoard().isBlot(x, y) || this.getBoard().isEmpty(x, y);
     }
 
-    static BackgammonState getINSTANCE() {
+    public static BackgammonState getINSTANCE() {
         return (INSTANCE==null)? new BackgammonState() : INSTANCE;
     }
 

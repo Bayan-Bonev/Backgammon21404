@@ -1,27 +1,33 @@
 package game_functionalities;
 
-public class GiulbaraState extends Game implements State{
+import game_objects.Board;
+import game_objects.GameObjectFactory;
+
+public class GiulbaraState extends Game implements State {
 
     public static GiulbaraState INSTANCE;
 
     @Override
-    void arrangeBoard() {
+    public void arrangeBoard() {
+        Board board = (Board) GameObjectFactory.createInstance("board");
+        board.addPiece(true, 11, 0, 15, -1);
+        board.addPiece(true, 0, 1, 15, -1);
+        this.setBoard(board);
+    }
+
+    @Override
+    public void movePiece() {
 
     }
 
     @Override
-    void movePiece() {
-
-    }
-
-    @Override
-    boolean canMove() {
+    public boolean canMove() {
         return false;
     }
 
     @Override
-    boolean isVulnerable(int x, int y) {
-        return false;
+    public boolean isVulnerable(int x, int y) {
+        return this.getBoard().isEmpty(x, y);
     }
 
     public static GiulbaraState getINSTANCE() {

@@ -3,7 +3,7 @@ package game_functionalities;
 import game_objects.GameObjectFactory;
 import game_objects.Player;
 
-public class TapaState extends Game implements State{
+public class TapaState extends Game implements State {
 
     public static TapaState INSTANCE;
 
@@ -12,23 +12,25 @@ public class TapaState extends Game implements State{
     }
 
     @Override
-    void arrangeBoard() { //todo
+    public void arrangeBoard() { //todo
 
     }
 
     @Override
-    void movePiece() {
+    public void movePiece() {
 
     }
 
     @Override
-    boolean canMove() {
+    public boolean canMove() {
         return false;
     }
 
+
+
     @Override
-    boolean isVulnerable(int x, int y) {
-        return false;
+    public boolean isVulnerable(int x, int y) {
+        return this.getBoard().isBlot(x, y) || this.getBoard().isEmpty(x, y);
     }
 
     public static TapaState getINSTANCE() {

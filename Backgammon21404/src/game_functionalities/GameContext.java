@@ -1,11 +1,50 @@
 package game_functionalities;
 
-public class GameContext<T extends State> {
+import game_objects.*;
 
-    private T currentState;
+public class GameContext {
 
-    GameContext(T currentState) {
+    private static Game gameInstance;
+    private static State currentState;
+
+    GameContext(State currentState) {
         this.currentState = currentState;
+    }
+
+    public State getCurrentState() {
+        if (currentState instanceof BackgammonState) {
+            return BackgammonState.getINSTANCE();
+        }
+        else if(currentState instanceof GiulbaraState) {
+            return GiulbaraState.getINSTANCE();
+        }
+        else {
+            return TapaState.getINSTANCE();
+        }
+    }
+
+    public static Board getBoard() {
+        return gameInstance.getBoard();
+    }
+
+    public static void setBoard(Board board) {
+        gameInstance.setBoard(board);
+    }
+
+    public static AbstractPlayer getCurrentPlayer() {
+        return gameInstance.getCurrentPlayer();
+    }
+
+    public static Player getPlayer() {
+        return gameInstance.getPlayer();
+    }
+
+    public static ArtificialPlayer getBot() {
+        return gameInstance.getBot();
+    }
+
+    public static State getState() {
+        return currentState;
     }
 
 }

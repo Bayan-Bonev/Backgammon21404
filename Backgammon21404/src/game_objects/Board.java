@@ -1,5 +1,7 @@
 package game_objects;
 
+import game_functionalities.GameContext;
+
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -17,8 +19,20 @@ public class Board implements IGameObject {
         }
     }
 
-    boolean isVulnerable(int x, int y) {
-        return board[y][x].size() < 2;
+    public boolean isBlot(int x, int y) {
+        return board[y][x].size() == 1;
+    }
+
+    public boolean isEmpty(int x, int y) {
+        return board[y][x].isEmpty();
+    }
+
+    public boolean isWhite(int x, int y) {
+        return board[y][x].peek().isWhite();
+    }
+
+    public Stack<Piece> getByIdx(int x, int y) {
+        return board[y][x];
     }
 
     /*int getUnavailablePositionsInStartingBoard(boolean isWhite){
@@ -46,36 +60,13 @@ public class Board implements IGameObject {
         return blots.toArray(new Piece[0]);
     }
 
-    /*public int[] validMoves(int x, int y, int[] dice, boolean isWhite, Player currentPlayer) {
-        int[] validMoves = new int[dice.length];
-        if (currentPlayer.getCapturedByOpponent()[0] == null) {
-            for (int i = 0; i < dice.length; i++) {
-                if (Utils.isVulnerable(board, (x + dice[i]), y)) {
-                    validMoves[i] = dice[i];
-                }
-            }
-        }
-        else {
-            int yOfStartingBoard = (isWhite)? 0 : 1;
-            for (int xPos = 6; x < 12; x++) {
-                for (int dieValue : dice) {
-                    if (isVulnerable(x, y)) {
-                        for (int i = 0; i < validMoves.length; i++) {
-                            if (validMoves[i] == 0) {
-                                validMoves[i] = dieValue;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return validMoves;
-    }*/
-
-
     @Override
     public String toString() {
         return Arrays.toString(board);
+    }
+
+    public Stack<Piece>[][] getBoard() {
+        return this.board;
     }
 
 }

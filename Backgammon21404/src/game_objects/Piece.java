@@ -20,6 +20,10 @@ public class Piece {
         return (colourFactor * positionFactor);
     }
 
+    public boolean isWhite() {
+        return this.isWhite;
+    }
+
     void setDirection() {
         this.direction = findDirection();
     }

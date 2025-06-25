@@ -1,26 +1,34 @@
 package game_objects;
 
-import game_functionalities.Game;
 import game_functionalities.State;
+import utilities.board_logic_utilities.MoveAgentFactory;
 import utilities.board_logic_utilities.MoveEvaluator;
 import utilities.board_logic_utilities.MoveSimulator;
 import utilities.board_logic_utilities.MoveValidator;
 
-import java.util.function.Supplier;
+public class ArtificialPlayer extends AbstractPlayer {
 
-public class ArtificialPlayer<T extends State> extends AbstractPlayer {
-
-    private T currentState;
-    public static MoveValidator<T> validator = new MoveValidator(new Supplier<T>().get());
-    public static MoveEvaluator<T> evaluator = new MoveEvaluator(new Supplier<T>().get());
-    public static MoveSimulator
+    private State currentState;
+    public static MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
+    public static MoveEvaluator evaluator = (MoveEvaluator) MoveAgentFactory.createInstance("evaluator");
+    public static MoveSimulator simulator = (MoveSimulator) MoveAgentFactory.createInstance("simulator");
 
     ArtificialPlayer() {
         super();
     }
 
-    T getState() {
-        return this.currentState;
+    ArtificialPlayer(State state) {
+        validator.setState(state);
+        evaluator.setState(state);
+        simulator.setState(state);
+    }
+
+    void play() {
+
+    }
+
+    public void setState(State state) {
+        this.currentState = state;
     }
     
 }

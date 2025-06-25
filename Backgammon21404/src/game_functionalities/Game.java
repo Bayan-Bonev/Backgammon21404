@@ -1,33 +1,31 @@
 package game_functionalities;
 
 import game_objects.*;
+import utilities.board_logic_utilities.*;
 
 public abstract class Game {
 
+    private final MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
+
     private Board board;
     private AbstractPlayer currentPlayer;
-    private final Player player;
-    private final ArtificialPlayer bot;
+    private Player player;
+    private ArtificialPlayer bot;
 
     Game() {
-        this.setCurrentPlayer(null);
-        this.player = null;
-        this.bot = null;
         this.setBoard((Board) GameObjectFactory.createInstance("Board"));
     }
 
     Game(AbstractPlayer currentPlayer) {
         this.setCurrentPlayer(currentPlayer);
-        this.player = (currentPlayer instanceof Player)? (Player)currentPlayer: (Player)GameObjectFactory.createInstance("Player");
-        this.bot = (currentPlayer instanceof ArtificialPlayer)? (ArtificialPlayer) currentPlayer:new ArtificialPlayer<>();
+        this.player = (currentPlayer instanceof Player)?
+                (Player)currentPlayer:
+                (Player)GameObjectFactory.createInstance("Player");
+        this.bot = (currentPlayer instanceof ArtificialPlayer)?
+                (ArtificialPlayer) currentPlayer :
+                (ArtificialPlayer) GameObjectFactory.createInstance("artificial player");
         this.setBoard((Board) GameObjectFactory.createInstance("Board"));
     }
-
-    abstract boolean canMove();
-    abstract boolean isVulnerable(int x, int y);
-
-    abstract void arrangeBoard();
-    abstract void movePiece();
 
     AbstractPlayer getCurrentPlayer() {
         return currentPlayer;
