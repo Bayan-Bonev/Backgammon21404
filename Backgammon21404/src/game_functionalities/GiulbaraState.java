@@ -30,10 +30,18 @@ public class GiulbaraState extends Game implements State {
         return this.getBoard().isEmpty(x, y);
     }
 
-    public int[] getOuterBoardIndices() {
-        boolean isWhite = GameContext.getPlayer().isWhite();
+    @Override
+    public int[] getOuterBoardIndices(boolean isWhite) {
         return new int[] {
                 isWhite? 6:0, //x
+                isWhite? 0:1  //y
+        };
+    }
+
+    @Override
+    public int[] getHomeBoardIndices(boolean isWhite) {
+        return new int[] {
+                isWhite? 6:11,//upper bound of x
                 isWhite? 0:1  //y
         };
     }

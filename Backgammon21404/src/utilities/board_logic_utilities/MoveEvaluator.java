@@ -43,7 +43,7 @@ public class MoveEvaluator extends MoveAgent {
 
     private int countOpeningsInOuterBoard() {
         boolean isWhite = GameContext.getCurrentPlayer().isWhite();
-        int[] searchRadius = GameContext.getState().getOuterBoardIndices();
+        int[] searchRadius = GameContext.getState().getOuterBoardIndices(isWhite);
 
         int openings = 0;
 

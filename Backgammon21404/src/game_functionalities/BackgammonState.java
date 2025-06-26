@@ -47,9 +47,8 @@ public class BackgammonState extends Game implements State {
     @Override
     public int[] getOuterBoardIndices( boolean isWhite) {  // Gets the board quadrant where the player starts.
         return new int[]{
-                isWhite? 6 : 0,
-                isWhite? 11: 6,
-                isWhite? 0 : 1
+                isWhite? 6 : 11, //upper bound of x
+                isWhite? 0 : 1   //y
         };
     }
 
