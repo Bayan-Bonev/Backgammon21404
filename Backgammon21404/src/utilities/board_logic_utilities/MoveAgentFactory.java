@@ -1,10 +1,5 @@
 package utilities.board_logic_utilities;
 
-import game_objects.ArtificialPlayer;
-import game_objects.Board;
-import game_objects.IGameObject;
-import game_objects.Player;
-
 import java.util.Map;
 import java.util.function.Supplier;
 

@@ -11,6 +11,10 @@ public class GameContext {
         this.currentState = currentState;
     }
 
+    public static void start() {
+
+    }
+
     public State getCurrentState() {
         if (currentState instanceof BackgammonState) {
             return BackgammonState.getINSTANCE();

@@ -13,7 +13,7 @@ public class MoveValidator extends MoveAgent {
         super();
     }
 
-    boolean isValid(Move move) {
+    public boolean isValid(Move move) {
         boolean currentPlayerIsWhite = GameContext.getCurrentPlayer().isWhite();
         int x1 = move.getX1();
         int x2 = move.getX2();

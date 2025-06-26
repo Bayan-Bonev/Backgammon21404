@@ -14,7 +14,7 @@ public class MoveSimulator extends MoveAgent {
         super();
     }
 
-    ArrayList<Move> simulatePossibleMoves(){
+    public ArrayList<Move> simulatePossibleMoves(){
         MoveValidator validator = new MoveValidator();
         ArrayList<Move> possibleMoves = new ArrayList<>();
         Stack<Piece>[][] boardAsMatrix = GameContext.getBoard().getBoard();

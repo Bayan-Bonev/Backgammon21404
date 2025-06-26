@@ -27,6 +27,10 @@ public abstract class Game {
         this.setBoard((Board) GameObjectFactory.createInstance("Board"));
     }
 
+    public void switchPlayer() {
+        this.currentPlayer = (currentPlayer instanceof Player)? this.bot:this.player;
+    }
+
     AbstractPlayer getCurrentPlayer() {
         return currentPlayer;
     }

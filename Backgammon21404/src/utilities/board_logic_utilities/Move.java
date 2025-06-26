@@ -10,7 +10,7 @@ public class Move {
     private int y1;
     private int x2;
     private int y2;
-    private double riskRewardRatio;
+    private double rewardToRiskRatio;
     private List<Move> possibleMoves;
 
     Move(int x1, int y1, int dieValue) {
@@ -74,12 +74,12 @@ public class Move {
         this.y2 = y2;
     }
 
-    public double getRiskRewardRatio() {
-        return riskRewardRatio;
+    public double getRewardToRiskRatio() {
+        return rewardToRiskRatio;
     }
 
-    public void setRiskRewardRatio(double riskRewardRatio) {
-        this.riskRewardRatio = riskRewardRatio;
+    public void setRewardToRiskRatio(double rewardToRiskRatio) {
+        this.rewardToRiskRatio = rewardToRiskRatio;
     }
 
     public List<Move> getPossibleMoves() {
