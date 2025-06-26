@@ -2,9 +2,11 @@ package game_functionalities;
 
 public interface State {
 
-    abstract boolean canMove();
-    abstract boolean isVulnerable(int x, int y);
-    abstract void arrangeBoard();
-    abstract void movePiece();
+    boolean canMove();
+    boolean isVulnerable(int x, int y);
+    void arrangeBoard();
+    void movePiece();
+    int[] getOuterBoardIndices(boolean isWhite);
+    int[] getHomeBoardIndices(boolean isWhite);
 
 }

@@ -30,6 +30,14 @@ public class GiulbaraState extends Game implements State {
         return this.getBoard().isEmpty(x, y);
     }
 
+    public int[] getOuterBoardIndices() {
+        boolean isWhite = GameContext.getPlayer().isWhite();
+        return new int[] {
+                isWhite? 6:0, //x
+                isWhite? 0:1  //y
+        };
+    }
+
     public static GiulbaraState getINSTANCE() {
         return (INSTANCE==null)? new GiulbaraState(): INSTANCE;
     }

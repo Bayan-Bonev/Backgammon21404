@@ -4,8 +4,10 @@ import game_functionalities.BackgammonState;
 import game_functionalities.GameContext;
 import game_functionalities.GiulbaraState;
 import game_functionalities.State;
+import game_objects.Board;
 import game_objects.Piece;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Stack;
@@ -23,20 +25,25 @@ public class MoveEvaluator extends MoveAgent {
     static double evaluate(Move move) {
         return 0.0;
     }
-    private double calcRisk() {
-        boolean isWhite = GameContext.getCurrentPlayer().isWhite();
 
-        Piece[] blots = findBlots(isWhite);
-        int risk = ((Math.round((float) countOpeningsInStartingBoard(isWhite) / 36)) * blots.length);
+    private double calcReward(Move move) {
+        return 0.0;
+        //todo
+    }
+
+    private double calcRisk() {
+        Piece[] blots = findBlots();
+        int[] dice = GameContext.getCurrentPlayer().getDice();
+        int risk = ((Math.round((float) countOpeningsInOuterBoard() / 36)) * blots.length);
         for (Piece blot : blots) {
-            risk += calcBlotVulnerability(blot, dice);
+            risk += calcBlotVulnerability(blot.getX(), blot.getY());
         }
         return risk;
     }
 
-    private int countOpeningsInStartingBoard() {
+    private int countOpeningsInOuterBoard() {
         boolean isWhite = GameContext.getCurrentPlayer().isWhite();
-        int[] searchRadius = findSearchRadiusForStartingBoard();
+        int[] searchRadius = GameContext.getState().getOuterBoardIndices();
 
         int openings = 0;
 
@@ -46,6 +53,21 @@ public class MoveEvaluator extends MoveAgent {
             }
         }
         return openings;
+    }
+
+    private Piece[] findBlots() {
+        Board board = GameContext.getBoard();
+        State currentState = GameContext.getState();
+        ArrayList<Piece> blots = new ArrayList<>();
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 12; x++) {
+                if (!(board.isEmpty(x, y)) && currentState.isVulnerable(x, y)) {
+                    blots.add(board.getByIdx(x, y).peek());
+                }
+            }
+        }
+        blots.trimToSize();
+        return blots.toArray(new Piece[0]);
     }
 
     private int calcBlotVulnerability(int x, int y) {
@@ -60,23 +82,13 @@ public class MoveEvaluator extends MoveAgent {
                 for (int dieValue : dice) {
                     move = new Move(i, j, dieValue);
                     if (isWhite != blot.isWhite()
-                            && Arrays.equals(move.determineIndicesAfterMove(x, y, dieValue), new int[]{x, y}) {
+                            && Arrays.equals(move.determineIndicesAfterMove(x, y, dieValue), new int[]{x, y})) {
                         vulnerability++;
                     }
                 }
             }
         }
         return vulnerability;
-    }
-
-    private int[] findSearchRadiusForStartingBoard() {
-        boolean isWhite = GameContext.getCurrentPlayer().isWhite();
-
-        return new int[]{
-                isWhite? 6 : 0,
-                isWhite? 11: 6,
-                isWhite? 0 : 1
-        };
     }
 
     private double calcReward() {

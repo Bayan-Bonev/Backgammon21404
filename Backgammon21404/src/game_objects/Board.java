@@ -1,7 +1,5 @@
 package game_objects;
 
-import game_functionalities.GameContext;
-
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -35,38 +33,7 @@ public class Board implements IGameObject {
         return board[y][x];
     }
 
-    /*int getUnavailablePositionsInStartingBoard(boolean isWhite){
-        int posCounter = 0;
-        int y = (isWhite)? 0:1;
-
-        for (int x = 6; x < 12; x++) {
-            if(!board[y][x].isEmpty()) {
-                posCounter++;
-            }
-        }
-        return posCounter;
-    }
-
-    Piece[] findBlots(boolean isWhite) {
-        ArrayList<Piece> blots = new ArrayList<>();
-        for (int y = 0; y < 2; y++) {
-            for (int x = 0; x < 12; x++) {
-                if (!(board[y][x].isEmpty()) && isVulnerable(x, y)) {
-                    blots.add(board[y][x].peek());
-                }
-            }
-        }
-        blots.trimToSize();
-        return blots.toArray(new Piece[0]);
-    }
-
-    @Override
-    public String toString() {
-        return Arrays.toString(board);
-    }
-
     public Stack<Piece>[][] getBoard() {
         return this.board;
-    }
-
+     }
 }

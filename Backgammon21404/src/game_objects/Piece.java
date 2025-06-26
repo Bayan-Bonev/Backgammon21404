@@ -28,6 +28,14 @@ public class Piece {
         this.direction = findDirection();
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     void setX(int x) {
         this.x = x;
     }
