@@ -35,5 +35,5 @@ public class Board implements IGameObject {
 
     public Stack<Piece>[][] getBoard() {
         return this.board;
-     }
+    }
 }
