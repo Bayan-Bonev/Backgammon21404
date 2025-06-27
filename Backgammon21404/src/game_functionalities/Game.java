@@ -3,12 +3,14 @@ package game_functionalities;
 import game_objects.*;
 import utilities.board_logic_utilities.*;
 
+import java.util.Stack;
+
 public abstract class Game {
 
-    private final MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
+    static final MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
 
     private Board board;
-    private AbstractPlayer currentPlayer;
+    public AbstractPlayer currentPlayer;
     private Player player;
     private ArtificialPlayer bot;
 
@@ -25,6 +27,21 @@ public abstract class Game {
                 (ArtificialPlayer) currentPlayer :
                 (ArtificialPlayer) GameObjectFactory.createInstance("artificial player");
         this.setBoard((Board) GameObjectFactory.createInstance("Board"));
+    }
+
+    public void movePiece(Move move) {
+        if (Game.validator.isValid(move) && canMove()) {
+            Stack<Piece>[][] board = GameContext.getBoard().getBoard();
+            board[move.getX2()][move.getY2()].push(
+                    board[move.getY1()][move.getX1()].pop()
+            );
+            Board boardAfterMove = (Board) GameObjectFactory.createInstance("Board");
+            GameContext.setBoard(boardAfterMove);
+        }
+    }
+
+    public boolean canMove() {
+        return (GameContext.getCurrentPlayer().capturedIsEmpty());
     }
 
     public void switchPlayer() {

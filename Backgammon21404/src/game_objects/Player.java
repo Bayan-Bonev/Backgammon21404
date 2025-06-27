@@ -10,4 +10,14 @@ public class Player extends AbstractPlayer {
         super(isWhite);
     }
 
+    public boolean hasDieValue(int dieValue) {
+        int dice[] = this.getDice();
+        for (int d : dice) {
+            if (d == dieValue) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

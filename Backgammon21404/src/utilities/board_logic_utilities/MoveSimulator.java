@@ -1,12 +1,10 @@
 package utilities.board_logic_utilities;
 
+import java.util.HashMap;
 import game_functionalities.GameContext;
-import game_objects.Board;
 import game_objects.Piece;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class MoveSimulator extends MoveAgent {
 
@@ -14,10 +12,11 @@ public class MoveSimulator extends MoveAgent {
         super();
     }
 
-    public ArrayList<Move> simulatePossibleMoves(){
+    public HashMap<Integer, List<Move>> simulatePossibleMoves(){
         MoveValidator validator = new MoveValidator();
-        ArrayList<Move> possibleMoves = new ArrayList<>();
+        HashMap<Integer, List<Move>> possibleMoves = new HashMap<>();
         Stack<Piece>[][] boardAsMatrix = GameContext.getBoard().getBoard();
+        List<Move> movesPerDieValue = new ArrayList<>();
         int[] dice = GameContext.getCurrentPlayer().getDice();
         int x1, y1, x2, y2;
         Move move;
@@ -27,9 +26,8 @@ public class MoveSimulator extends MoveAgent {
                 for (int dieValue : dice) {
                     move = new Move(x1, y1, dice[dieValue]);
                     if (validator.isValid(move)) {
-                        possibleMoves.add(move);
+                        movesPerDieValue.add(move);
                     }
-
                 }
             }
         }

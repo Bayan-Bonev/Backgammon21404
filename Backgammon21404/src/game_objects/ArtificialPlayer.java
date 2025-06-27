@@ -1,23 +1,28 @@
 package game_objects;
 
+import game_functionalities.GameContext;
 import game_functionalities.State;
 import utilities.board_logic_utilities.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Random;
 
 public class ArtificialPlayer extends AbstractPlayer {
 
-    private static Move[] possibleMoves;
+    private static HashMap<Integer, Move> movesPerDie;
+    static final MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
+    static final MoveEvaluator evaluator = (MoveEvaluator) MoveAgentFactory.createInstance("evaluator");
+    static final MoveSimulator simulator = (MoveSimulator) MoveAgentFactory.createInstance("simulator");
 
     private State currentState;
-    public static MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
-    public static MoveEvaluator evaluator = (MoveEvaluator) MoveAgentFactory.createInstance("evaluator");
-    public static MoveSimulator simulator = (MoveSimulator) MoveAgentFactory.createInstance("simulator");
 
     ArtificialPlayer() {
         super();
+        validator.setState(GameContext.getState());
+        evaluator.setState(GameContext.getState());
+        simulator.setState(GameContext.getState());
     }
 
     ArtificialPlayer(State state) {
@@ -27,7 +32,7 @@ public class ArtificialPlayer extends AbstractPlayer {
     }
 
     public Move play() {
-        possibleMoves = (Move[])simulator.simulatePossibleMoves().toArray();
+        movesPerDie= simulator.simulatePossibleMoves();
         setRiskPerMove();
         double totalRewardToRiskRatio = sumRewardToRiskRatio();
 
@@ -35,14 +40,14 @@ public class ArtificialPlayer extends AbstractPlayer {
     }
 
     void setRiskPerMove() {
-        for (Move m : possibleMoves) {
+        for (Move m : movesPerDie.keySet().toArray()) {
             m.setRewardToRiskRatio(evaluator.evaluate(m));
         }
     }
 
     private static double sumRewardToRiskRatio() {
         double total = 0;
-        for (Move m : possibleMoves) {
+        for (Move m : movesPerDie.keySet()) {
             total += m.getRewardToRiskRatio();
         }
         return total;

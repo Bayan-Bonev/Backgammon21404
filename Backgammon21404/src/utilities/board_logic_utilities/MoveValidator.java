@@ -1,11 +1,11 @@
 package utilities.board_logic_utilities;
 
 import game_functionalities.*;
-import game_objects.Board;
-import game_objects.Piece;
+import utilities.exceptions.InvalidMoveException;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class MoveValidator extends MoveAgent {
 
@@ -14,6 +14,7 @@ public class MoveValidator extends MoveAgent {
     }
 
     public boolean isValid(Move move) {
+        State state = GameContext.getState();
         boolean currentPlayerIsWhite = GameContext.getCurrentPlayer().isWhite();
         int x1 = move.getX1();
         int x2 = move.getX2();
@@ -22,9 +23,7 @@ public class MoveValidator extends MoveAgent {
 
         return (!board.isEmpty(x1, y1)
                 && currentPlayerIsWhite == board.isWhite(x1, y1)
-                &&
-                (super.getState().isVulnerable(x2, y2)
-                        || currentPlayerIsWhite == board.isWhite(x2, y2))
-        );
+                && (super.getState().isVulnerable(x2, y2)
+                || currentPlayerIsWhite == board.isWhite(x2, y2)));
     }
 }

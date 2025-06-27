@@ -13,7 +13,7 @@ public class Move {
     private double rewardToRiskRatio;
     private List<Move> possibleMoves;
 
-    Move(int x1, int y1, int dieValue) {
+    public Move(int x1, int y1, int dieValue) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = determineIndicesAfterMove(x1, y1, dieValue)[0];

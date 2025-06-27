@@ -1,23 +1,22 @@
 package game_functionalities;
 
 import game_objects.*;
+import utilities.board_logic_utilities.Move;
+
+import java.util.Stack;
 
 public class GameContext {
 
-    private static Game gameInstance;
-    private static State currentState;
+    public static Game gameInstance;
+    public static State currentState;
 
-    GameContext(State currentState) {
+    public GameContext(State currentState) {
         this.currentState = currentState;
     }
 
-    public static void start() {
-
-    }
-
     public State getCurrentState() {
-        if (currentState instanceof BackgammonState) {
-            return BackgammonState.getINSTANCE();
+        if (currentState instanceof TablaState) {
+            return TablaState.getINSTANCE();
         }
         else if(currentState instanceof GiulbaraState) {
             return GiulbaraState.getINSTANCE();
@@ -25,6 +24,14 @@ public class GameContext {
         else {
             return TapaState.getINSTANCE();
         }
+    }
+
+    public static void movePiece(Move move) {
+        gameInstance.movePiece(move);
+    }
+
+    public boolean canMove() {
+        return (GameContext.getCurrentPlayer().capturedIsEmpty());
     }
 
     public static Board getBoard() {
@@ -48,7 +55,9 @@ public class GameContext {
     }
 
     public static State getState() {
-        return currentState;
+        return getState();
     }
+
+
 
 }

@@ -2,6 +2,10 @@ package game_functionalities;
 
 import game_objects.Board;
 import game_objects.GameObjectFactory;
+import game_objects.Piece;
+import utilities.board_logic_utilities.Move;
+
+import java.util.Stack;
 
 public class GiulbaraState extends Game implements State {
 
@@ -13,16 +17,6 @@ public class GiulbaraState extends Game implements State {
         board.addPiece(true, 11, 0, 15, -1);
         board.addPiece(true, 0, 1, 15, -1);
         this.setBoard(board);
-    }
-
-    @Override
-    public void movePiece() {
-
-    }
-
-    @Override
-    public boolean canMove() {
-        return false;
     }
 
     @Override

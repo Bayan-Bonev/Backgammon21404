@@ -17,16 +17,6 @@ public class TapaState extends Game implements State {
     }
 
     @Override
-    public void movePiece() {
-
-    }
-
-    @Override
-    public boolean canMove() {
-        return false;
-    }
-
-    @Override
     public boolean isVulnerable(int x, int y) {
         return this.getBoard().isBlot(x, y) || this.getBoard().isEmpty(x, y);
     }
