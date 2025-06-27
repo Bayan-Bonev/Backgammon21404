@@ -4,14 +4,11 @@ import game_functionalities.GameContext;
 import game_functionalities.State;
 import utilities.board_logic_utilities.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class ArtificialPlayer extends AbstractPlayer {
 
-    private static HashMap<Integer, Move> movesPerDie;
+    private static HashMap<Integer, List<Move>> movesPerDie;
     static final MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
     static final MoveEvaluator evaluator = (MoveEvaluator) MoveAgentFactory.createInstance("evaluator");
     static final MoveSimulator simulator = (MoveSimulator) MoveAgentFactory.createInstance("simulator");
@@ -32,23 +29,30 @@ public class ArtificialPlayer extends AbstractPlayer {
     }
 
     public Move play() {
-        movesPerDie= simulator.simulatePossibleMoves();
+        movesPerDie = simulator.simulatePossibleMoves();
         setRiskPerMove();
         double totalRewardToRiskRatio = sumRewardToRiskRatio();
 
-        return decide();
+        Move m = decide();
+        movesPerDie.remove(movesPerDie.get(m)); // осигурява че никой зар няма да се играе повече от веднъж.
+
+        return m;
     }
 
     void setRiskPerMove() {
-        for (Move m : movesPerDie.keySet().toArray()) {
-            m.setRewardToRiskRatio(evaluator.evaluate(m));
+        for (List<Move> moves : movesPerDie.values()) {
+            for (Move m : moves) {
+                m.setRewardToRiskRatio(evaluator.evaluate(m));
+            }
         }
     }
 
     private static double sumRewardToRiskRatio() {
         double total = 0;
-        for (Move m : movesPerDie.keySet()) {
-            total += m.getRewardToRiskRatio();
+        for (List<Move> moves : movesPerDie.values()) {
+            for (Move m : moves) {
+                total += m.getRewardToRiskRatio();
+            }
         }
         return total;
     }
@@ -57,17 +61,18 @@ public class ArtificialPlayer extends AbstractPlayer {
         double totalWeight = sumRewardToRiskRatio();
         double decision = Math.random() * totalWeight;
         double weightSoFar = 0;
-        for (Move m : possibleMoves) {
-            weightSoFar += m.getRewardToRiskRatio();
-            if (decision >= weightSoFar) {
-                return m;
+        for (List<Move> moves : movesPerDie.values()) {
+            for (Move m : moves) {
+                weightSoFar += m.getRewardToRiskRatio();
+                if (decision <= weightSoFar) {
+                    return m;
+                }
             }
         }
-        return possibleMoves[possibleMoves.length - 1];
+        return null;
     }
 
     public void setState(State state) {
         this.currentState = state;
     }
-    
 }

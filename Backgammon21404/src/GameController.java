@@ -24,6 +24,10 @@ public class GameController {
         }
     }
 
+    public void start() {
+
+    }
+
     public void turn() {
         AbstractPlayer currentPlayer = GameContext.getCurrentPlayer();
         currentPlayer.rollDice();
@@ -43,10 +47,6 @@ public class GameController {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    private HashMap<Integer, Boolean> dicePlayed(int dice[]) {
-
     }
 
     boolean isOver() {

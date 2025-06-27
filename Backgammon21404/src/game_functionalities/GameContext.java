@@ -11,7 +11,8 @@ public class GameContext {
     public static State currentState;
 
     public GameContext(State currentState) {
-        this.currentState = currentState;
+
+        currentState = currentState;
     }
 
     public State getCurrentState() {
