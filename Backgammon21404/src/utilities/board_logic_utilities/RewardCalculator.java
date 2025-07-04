@@ -40,17 +40,15 @@ public class RewardCalculator {
     }
 
     private double getHitReward(Move move) {
-        return 5.0; // Arbitrary positive reward, adjust as needed
+        return 5.0;
     }
 
 
     private int getHomeDistance(int x, int y) {
         boolean isWhite = GameContext.getCurrentPlayer().isWhite();
         if (isWhite) {
-            // Example: home is at (0, y)
             return x;
         } else {
-            // Example: home is at (11, y)
             return 11 - x;
         }
     }

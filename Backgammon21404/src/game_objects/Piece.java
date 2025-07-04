@@ -6,6 +6,7 @@ public class Piece {
     private int x;
     private int y;
     private int direction;
+    private int spacesTravelled;
 
     Piece(boolean isWhite, int x, int y) {
         this.isWhite = isWhite;
@@ -24,7 +25,7 @@ public class Piece {
         return this.isWhite;
     }
 
-    void setDirection() {
+    public void setDirection() {
         this.direction = findDirection();
     }
 

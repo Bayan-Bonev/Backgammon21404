@@ -9,18 +9,12 @@ import game_objects.Piece;
 import java.util.Stack;
 
 public abstract class MoveAgent {
-
-    static Board board;
     Move move;
     State currentState;
 
-    MoveAgent() {
-        board = GameContext.getBoard();
-    }
+    MoveAgent() {}
 
     MoveAgent(State state) {
-        board = GameContext.getBoard();
-        this.move = null;
         this.currentState = state;
     }
 

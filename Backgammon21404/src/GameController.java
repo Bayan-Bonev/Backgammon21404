@@ -25,7 +25,9 @@ public class GameController {
     }
 
     public void start() {
-
+        while(!isOver()) {
+            turn();
+        }
     }
 
     public void turn() {

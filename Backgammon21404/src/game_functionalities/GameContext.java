@@ -11,7 +11,6 @@ public class GameContext {
     public static State currentState;
 
     public GameContext(State currentState) {
-
         currentState = currentState;
     }
 
@@ -58,7 +57,4 @@ public class GameContext {
     public static State getState() {
         return getState();
     }
-
-
-
 }

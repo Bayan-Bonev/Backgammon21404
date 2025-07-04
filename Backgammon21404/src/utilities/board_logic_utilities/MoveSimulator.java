@@ -8,9 +8,7 @@ import java.util.*;
 
 public class MoveSimulator extends MoveAgent {
 
-    MoveSimulator() {
-        super();
-    }
+    MoveSimulator() {}
 
     public HashMap<Integer, List<Move>> simulatePossibleMoves() {
         MoveValidator validator = new MoveValidator();

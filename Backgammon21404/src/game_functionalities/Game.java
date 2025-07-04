@@ -7,8 +7,6 @@ import java.util.Stack;
 
 public abstract class Game {
 
-    static final MoveValidator validator = (MoveValidator) MoveAgentFactory.createInstance("validator");
-
     private Board board;
     public AbstractPlayer currentPlayer;
     private Player player;
@@ -30,7 +28,7 @@ public abstract class Game {
     }
 
     public void movePiece(Move move) {
-        if (Game.validator.isValid(move) && canMove()) {
+        if (move.isValid() && canMove()) {
             Stack<Piece>[][] board = GameContext.getBoard().getBoard();
             board[move.getX2()][move.getY2()].push(
                     board[move.getY1()][move.getX1()].pop()

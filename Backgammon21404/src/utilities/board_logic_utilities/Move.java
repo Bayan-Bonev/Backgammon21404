@@ -2,16 +2,19 @@ package utilities.board_logic_utilities;
 
 import game_functionalities.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Move {
+
+    static MoveValidator validator = new MoveValidator();
+    static MoveEvaluator evaluator = new MoveEvaluator();
+    static MoveSimulator simulator = new MoveSimulator();
 
     private int x1;
     private int y1;
     private int x2;
     private int y2;
-    private double rewardToRiskRatio;
-    private List<Move> possibleMoves;
 
     public Move(int x1, int y1, int dieValue) {
         this.x1 = x1;
@@ -40,6 +43,18 @@ public class Move {
             y--;
         }
         return new int[]{x, y};
+    }
+
+    public boolean isValid() {
+        return validator.isValid(this);
+    }
+
+    public double getRiskRewardRatio() {
+        return evaluator.evaluate(this);
+    }
+
+    public HashMap<Integer, List<Move>> getPossibleMoves() {
+        return simulator.simulatePossibleMoves();
     }
 
     public int getX1() {
@@ -72,21 +87,5 @@ public class Move {
 
     public void setY2(int y2) {
         this.y2 = y2;
-    }
-
-    public double getRewardToRiskRatio() {
-        return rewardToRiskRatio;
-    }
-
-    public void setRewardToRiskRatio(double rewardToRiskRatio) {
-        this.rewardToRiskRatio = rewardToRiskRatio;
-    }
-
-    public List<Move> getPossibleMoves() {
-        return possibleMoves;
-    }
-
-    public void setPossibleMoves(List<Move> possibleMoves) {
-        this.possibleMoves = possibleMoves;
     }
 }
