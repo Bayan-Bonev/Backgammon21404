@@ -7,7 +7,7 @@ public class MoveValidator extends MoveAgent {
     MoveValidator() {}
 
     public boolean isValid(Move move) {
-        State state = GameContext.getState();
+        Strategy state = GameContext.getState();
         boolean currentPlayerIsWhite = GameContext.getCurrentPlayer().isWhite();
         int x1 = move.getX1();
         int x2 = move.getX2();

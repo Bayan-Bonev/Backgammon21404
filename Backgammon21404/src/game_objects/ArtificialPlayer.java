@@ -1,7 +1,7 @@
 package game_objects;
 
 import game_functionalities.GameContext;
-import game_functionalities.State;
+import game_functionalities.Strategy;
 import utilities.board_logic_utilities.*;
 
 import java.util.*;
@@ -13,7 +13,7 @@ public class ArtificialPlayer extends AbstractPlayer {
     static final MoveEvaluator evaluator = (MoveEvaluator) MoveAgentFactory.createInstance("evaluator");
     static final MoveSimulator simulator = (MoveSimulator) MoveAgentFactory.createInstance("simulator");
 
-    private State currentState;
+    private Strategy currentStrategy;
 
     ArtificialPlayer() {
         super();
@@ -22,7 +22,7 @@ public class ArtificialPlayer extends AbstractPlayer {
         simulator.setState(GameContext.getState());
     }
 
-    ArtificialPlayer(State state) {
+    ArtificialPlayer(Strategy state) {
         validator.setState(state);
         evaluator.setState(state);
         simulator.setState(state);
@@ -42,7 +42,7 @@ public class ArtificialPlayer extends AbstractPlayer {
     void setRiskPerMove() {
         for (List<Move> moves : movesPerDie.values()) {
             for (Move m : moves) {
-                m.setRewardToRiskRatio(evaluator.evaluate(m));
+                m.setRiskRewardRatio(evaluator.evaluate(m));
             }
         }
     }
@@ -51,7 +51,7 @@ public class ArtificialPlayer extends AbstractPlayer {
         double total = 0;
         for (List<Move> moves : movesPerDie.values()) {
             for (Move m : moves) {
-                total += m.getRewardToRiskRatio();
+                total += m.getRiskRewardRatio();
             }
         }
         return total;
@@ -63,7 +63,7 @@ public class ArtificialPlayer extends AbstractPlayer {
         double weightSoFar = 0;
         for (List<Move> moves : movesPerDie.values()) {
             for (Move m : moves) {
-                weightSoFar += m.getRewardToRiskRatio();
+                weightSoFar += m.getRiskRewardRatio();
                 if (decision <= weightSoFar) {
                     return m;
                 }
@@ -72,7 +72,7 @@ public class ArtificialPlayer extends AbstractPlayer {
         return null;
     }
 
-    public void setState(State state) {
-        this.currentState = state;
+    public void setState(Strategy strategy) {
+        this.currentStrategy = strategy;
     }
 }

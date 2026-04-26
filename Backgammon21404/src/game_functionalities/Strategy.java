@@ -1,8 +1,6 @@
 package game_functionalities;
 
-import utilities.board_logic_utilities.Move;
-
-public interface State {
+public interface Strategy {
 
     boolean isVulnerable(int x, int y);
     void arrangeBoard();

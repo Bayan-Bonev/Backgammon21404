@@ -2,13 +2,12 @@ package game_functionalities;
 
 import game_objects.Board;
 import game_objects.GameObjectFactory;
-import utilities.board_logic_utilities.Move;
 
-public class TablaState extends Game implements State {
+public class TablaStrategy extends Game implements Strategy {
 
-    static TablaState INSTANCE;
+    static TablaStrategy INSTANCE;
 
-    TablaState() {
+    TablaStrategy() {
         super();
     }
 
@@ -47,8 +46,8 @@ public class TablaState extends Game implements State {
         return getOuterBoardIndices( !(isWhite));
     }
 
-    public static TablaState getINSTANCE() {
-        return (INSTANCE==null)? new TablaState() : INSTANCE;
+    public static TablaStrategy getINSTANCE() {
+        return (INSTANCE==null)? new TablaStrategy() : INSTANCE;
     }
 
 }

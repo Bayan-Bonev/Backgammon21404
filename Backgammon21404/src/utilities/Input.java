@@ -1,7 +1,6 @@
 package utilities;
 
 import game_functionalities.*;
-import game_objects.GameObjectFactory;
 import utilities.board_logic_utilities.Move;
 import utilities.exceptions.InvalidInputException;
 
@@ -13,7 +12,7 @@ public class Input {
 
     public static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
 
-    public static State readState() throws InvalidInputException, IOException {
+    public static Strategy readState() throws InvalidInputException, IOException {
         System.out.println("Въведете игра:" +
                 "1 - табла" +
                 "2 - гюлбара" +
@@ -24,9 +23,9 @@ public class Input {
                     || input.equalsIgnoreCase("гюлбара")
                     || input.equalsIgnoreCase("тапа")) {
                 switch (input) {
-                    case ("табла") -> TablaState.getINSTANCE();
-                    case ("гюлбара") -> GiulbaraState.getINSTANCE();
-                    case ("тапа") -> TapaState.getINSTANCE();
+                    case ("табла") -> TablaStrategy.getINSTANCE();
+                    case ("гюлбара") -> GiulbaraStrategy.getINSTANCE();
+                    case ("тапа") -> TapaStrategy.getINSTANCE();
                 }
             }
             else {
@@ -35,7 +34,7 @@ public class Input {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return TablaState.getINSTANCE();
+        return TablaStrategy.getINSTANCE();
     }
 
     public static Move readMove() throws InvalidInputException {

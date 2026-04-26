@@ -1,7 +1,7 @@
 package utilities.board_logic_utilities;
 
 import game_functionalities.GameContext;
-import game_functionalities.State;
+import game_functionalities.Strategy;
 import game_objects.Board;
 import game_objects.Piece;
 
@@ -23,7 +23,7 @@ public class MoveEvaluator extends MoveAgent{
 
     static Piece[] findBlots(boolean isWhite) {
         Board board = GameContext.getBoard();
-        State currentState = GameContext.getState();
+        Strategy currentState = GameContext.getState();
         ArrayList<Piece> blots = new ArrayList<>();
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 12; x++) {

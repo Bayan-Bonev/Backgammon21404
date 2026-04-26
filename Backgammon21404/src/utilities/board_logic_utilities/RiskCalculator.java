@@ -1,7 +1,7 @@
 package utilities.board_logic_utilities;
 
 import game_functionalities.GameContext;
-import game_functionalities.State;
+import game_functionalities.Strategy;
 import game_objects.Piece;
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ public class RiskCalculator extends MoveAgent {
         super();
     }
 
-    RiskCalculator(State state) {
+    RiskCalculator(Strategy state) {
         super(state);
     }
 

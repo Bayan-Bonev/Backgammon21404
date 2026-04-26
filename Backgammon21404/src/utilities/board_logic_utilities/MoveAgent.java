@@ -1,28 +1,22 @@
 package utilities.board_logic_utilities;
 
-import game_functionalities.GameContext;
-import game_functionalities.State;
-import game_objects.Board;
-import game_objects.GameObjectFactory;
-import game_objects.Piece;
-
-import java.util.Stack;
+import game_functionalities.Strategy;
 
 public abstract class MoveAgent {
     Move move;
-    State currentState;
+    Strategy currentState;
 
     MoveAgent() {}
 
-    MoveAgent(State state) {
+    MoveAgent(Strategy state) {
         this.currentState = state;
     }
 
-    public void setState(State state) {
+    public void setState(Strategy state) {
         currentState = state;
     }
 
-    State getState() {
+    Strategy getState() {
         return currentState;
     }
 

@@ -1,18 +1,15 @@
 import game_functionalities.GameContext;
-import game_functionalities.State;
+import game_functionalities.Strategy;
 import game_objects.AbstractPlayer;
-import game_objects.ArtificialPlayer;
 import game_objects.Player;
 import utilities.Input;
 import utilities.exceptions.InvalidInputException;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class GameController {
 
-    private State currentState;
+    private Strategy currentState;
 
     public GameController() {
         try {

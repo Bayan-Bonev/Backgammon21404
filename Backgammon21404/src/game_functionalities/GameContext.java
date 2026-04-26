@@ -3,26 +3,24 @@ package game_functionalities;
 import game_objects.*;
 import utilities.board_logic_utilities.Move;
 
-import java.util.Stack;
-
 public class GameContext {
 
     public static Game gameInstance;
-    public static State currentState;
+    public static Strategy currentState;
 
-    public GameContext(State currentState) {
+    public GameContext(Strategy currentState) {
         currentState = currentState;
     }
 
-    public State getCurrentState() {
-        if (currentState instanceof TablaState) {
-            return TablaState.getINSTANCE();
+    public Strategy getCurrentState() {
+        if (currentState instanceof TablaStrategy) {
+            return TablaStrategy.getINSTANCE();
         }
-        else if(currentState instanceof GiulbaraState) {
-            return GiulbaraState.getINSTANCE();
+        else if(currentState instanceof GiulbaraStrategy) {
+            return GiulbaraStrategy.getINSTANCE();
         }
         else {
-            return TapaState.getINSTANCE();
+            return TapaStrategy.getINSTANCE();
         }
     }
 
@@ -54,7 +52,7 @@ public class GameContext {
         return gameInstance.getBot();
     }
 
-    public static State getState() {
+    public static Strategy getState() {
         return getState();
     }
 }
