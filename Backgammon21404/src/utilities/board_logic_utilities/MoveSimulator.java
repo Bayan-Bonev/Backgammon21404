@@ -2,19 +2,20 @@ package utilities.board_logic_utilities;
 
 import java.util.HashMap;
 import game_functionalities.GameContext;
+import game_functionalities.TurnEngine;
 import game_objects.Piece;
 
 import java.util.*;
 
 public class MoveSimulator extends MoveAgent {
 
-    MoveSimulator() {}
+    public MoveSimulator() {}
 
     public HashMap<Integer, List<Move>> simulatePossibleMoves() {
         MoveValidator validator = new MoveValidator();
         HashMap<Integer, List<Move>> possibleMoves = new HashMap<>();
         Stack<Piece>[][] boardAsMatrix = GameContext.getBoard().getBoard();
-        int[] dice = GameContext.getCurrentPlayer().getDice();
+        int[] dice = TurnEngine.dice;
 
         for (int diceIdx = 0; diceIdx < dice.length; diceIdx++) {
             List<Move> movesPerDieValue = new ArrayList<>();

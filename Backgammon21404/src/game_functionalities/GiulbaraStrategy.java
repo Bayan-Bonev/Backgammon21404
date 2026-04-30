@@ -1,15 +1,14 @@
 package game_functionalities;
 
 import game_objects.Board;
-import game_objects.GameObjectFactory;
 
-public class GiulbaraStrategy extends Game implements Strategy {
+public class GiulbaraStrategy extends Game implements GameStrategy {
 
-    public static GiulbaraStrategy INSTANCE;
+    static GiulbaraStrategy INSTANCE;
 
     @Override
     public void arrangeBoard() {
-        Board board = (Board) GameObjectFactory.createInstance("board");
+        Board board = new Board();
         board.addPiece(true, 11, 0, 15, -1);
         board.addPiece(true, 0, 1, 15, -1);
         this.setBoard(board);

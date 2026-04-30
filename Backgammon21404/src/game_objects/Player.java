@@ -2,11 +2,11 @@ package game_objects;
 
 public class Player extends AbstractPlayer {
 
-    Player() {
+    public Player() {
         super();
     }
 
-    Player(boolean isWhite) {
+    public Player(boolean isWhite) {
         super(isWhite);
     }
 

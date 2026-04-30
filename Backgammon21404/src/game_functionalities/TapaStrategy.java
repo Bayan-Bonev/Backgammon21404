@@ -1,19 +1,21 @@
 package game_functionalities;
 
-import game_objects.GameObjectFactory;
-import game_objects.Player;
+import game_objects.Board;
 
-public class TapaStrategy extends Game implements Strategy {
+public class TapaStrategy extends Game implements GameStrategy {
 
-    public static TapaStrategy INSTANCE;
+    static TapaStrategy INSTANCE;
 
-    private TapaStrategy() {
-        super((Player)GameObjectFactory.createInstance("Player"));
+    TapaStrategy() {
+        super();
     }
 
     @Override
-    public void arrangeBoard() { //todo
-
+    public void arrangeBoard() {
+        Board board = new Board();
+        board.addPiece(true, 0, 0, 15, -1);
+        board.addPiece(true, 0, 1, 15, 1);
+        GameContext.setBoard(board);
     }
 
     @Override

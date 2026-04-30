@@ -4,10 +4,10 @@ import game_functionalities.*;
 
 public class MoveValidator extends MoveAgent {
 
-    MoveValidator() {}
+    public MoveValidator() {}
 
     public boolean isValid(Move move) {
-        Strategy state = GameContext.getState();
+        GameStrategy state = GameContext.getState();
         boolean currentPlayerIsWhite = GameContext.getCurrentPlayer().isWhite();
         int x1 = move.getX1();
         int x2 = move.getX2();

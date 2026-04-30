@@ -1,6 +1,8 @@
 package game_functionalities;
 
-public interface Strategy {
+import java.util.HashMap;
+
+public interface GameStrategy {
 
     boolean isVulnerable(int x, int y);
     void arrangeBoard();

@@ -7,14 +7,16 @@ import java.util.List;
 
 public class Move {
 
-    static MoveValidator validator = new MoveValidator();
-    static MoveEvaluator evaluator = new MoveEvaluator();
-    static MoveSimulator simulator = new MoveSimulator();
+    static final MoveValidator VALIDATOR = new MoveValidator();
+    static final MoveEvaluator EVALUATOR = new MoveEvaluator();
+    static final MoveSimulator SIMULATOR = new MoveSimulator();
 
     private int x1;
     private int y1;
     private int x2;
     private int y2;
+
+    private double riskRewardRatio;
 
     public Move(int x1, int y1, int dieValue) {
         this.x1 = x1;
@@ -23,7 +25,7 @@ public class Move {
         this.x2 = determineIndicesAfterMove(x1, y1, dieValue)[0];
     }
 
-    Move(int x1, int y1, int x2, int y2) {
+    public Move(int x1, int y1, int x2, int y2) {
         this.setX1(x1);
         this.setY1(y1);
         this.setX2(x2);
@@ -46,15 +48,15 @@ public class Move {
     }
 
     public boolean isValid() {
-        return validator.isValid(this);
+        return VALIDATOR.isValid(this);
     }
 
     public double getRiskRewardRatio() {
-        return evaluator.evaluate(this);
+        return EVALUATOR.evaluate(this);
     }
 
     public HashMap<Integer, List<Move>> getPossibleMoves() {
-        return simulator.simulatePossibleMoves();
+        return SIMULATOR.simulatePossibleMoves();
     }
 
     public int getX1() {
@@ -87,5 +89,9 @@ public class Move {
 
     public void setY2(int y2) {
         this.y2 = y2;
+    }
+
+    public void setRiskRewardRatio(double riskRewardRatio) {
+        this.riskRewardRatio = riskRewardRatio;
     }
 }

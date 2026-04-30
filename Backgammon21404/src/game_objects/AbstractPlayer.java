@@ -21,13 +21,6 @@ public abstract class AbstractPlayer implements IGameObject {
         this.setWhite(isWhite);
     }
 
-    public void rollDice() {
-        int d1 = random.nextInt(1, 6);
-        int d2 = random.nextInt(1, 6);
-        this.setDice((d1==d2)? new int[]{d1, d2} : new int[]{d1,d1,d2,d2});
-    }
-
-
     public boolean isWhite() {
         return isWhite;
     }

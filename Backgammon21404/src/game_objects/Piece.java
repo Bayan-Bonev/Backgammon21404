@@ -8,7 +8,7 @@ public class Piece {
     private int direction;
     private int spacesTravelled;
 
-    Piece(boolean isWhite, int x, int y) {
+    public Piece(boolean isWhite, int x, int y) {
         this.isWhite = isWhite;
         this.x = x;
         this.y = y;

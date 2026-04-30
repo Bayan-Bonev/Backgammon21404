@@ -6,13 +6,13 @@ import utilities.board_logic_utilities.Move;
 public class GameContext {
 
     public static Game gameInstance;
-    public static Strategy currentState;
+    public static GameStrategy currentState;
 
-    public GameContext(Strategy currentState) {
+    public GameContext(GameStrategy currentState) {
         currentState = currentState;
     }
 
-    public Strategy getCurrentState() {
+    public GameStrategy getCurrentState() {
         if (currentState instanceof TablaStrategy) {
             return TablaStrategy.getINSTANCE();
         }
@@ -47,12 +47,18 @@ public class GameContext {
     public static Player getPlayer() {
         return gameInstance.getPlayer();
     }
+    public static void setPlayer(Player player) {
+        gameInstance.setPlayer(player);
+    }
 
     public static ArtificialPlayer getBot() {
         return gameInstance.getBot();
     }
+    public static void setBot(ArtificialPlayer bot) {
+        gameInstance.setBot(bot);
+    }
 
-    public static Strategy getState() {
-        return getState();
+    public static GameStrategy getState() {
+        return currentState;
     }
 }

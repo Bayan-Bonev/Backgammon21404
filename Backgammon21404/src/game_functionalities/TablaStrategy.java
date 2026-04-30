@@ -1,9 +1,8 @@
 package game_functionalities;
 
 import game_objects.Board;
-import game_objects.GameObjectFactory;
 
-public class TablaStrategy extends Game implements Strategy {
+public class TablaStrategy extends Game implements GameStrategy {
 
     static TablaStrategy INSTANCE;
 
@@ -13,7 +12,7 @@ public class TablaStrategy extends Game implements Strategy {
 
     @Override
     public void arrangeBoard() {
-        Board board = (Board) GameObjectFactory.createInstance("Board");
+        Board board = new Board();
 
         board.addPiece(true, 11, 0, 2, -1);
         board.addPiece(true, 0, 0, 5, -1);
@@ -35,7 +34,7 @@ public class TablaStrategy extends Game implements Strategy {
 
     @Override
     public int[] getOuterBoardIndices( boolean isWhite) {  // Gets the board quadrant where the player starts.
-        return new int[]{
+        return new int[] {
                 isWhite? 6 : 11, //upper bound of x
                 isWhite? 0 : 1   //y
         };

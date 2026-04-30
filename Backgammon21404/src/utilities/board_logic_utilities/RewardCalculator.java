@@ -19,7 +19,7 @@ public class RewardCalculator {
         // Higher reward for moving a piece closer to bearing off
         int startDistance = getHomeDistance(move.getX1(), move.getY1());
         int endDistance = getHomeDistance(move.getX2(), move.getY2());
-        return (startDistance - endDistance) * 1.0; // 1.0 is a weight, adjust as needed
+        return (startDistance - endDistance);
     }
 
     private boolean isBearingOff(Move move) {
@@ -29,7 +29,7 @@ public class RewardCalculator {
     }
 
     private double getBearingOffReward(Move move) {
-        return 10.0; // Arbitrary positive reward, adjust as needed
+        return 10.0;
     }
 
     private boolean isHittingOpponentBlot(Move move) {

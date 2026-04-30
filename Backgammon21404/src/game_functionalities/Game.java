@@ -1,11 +1,12 @@
 package game_functionalities;
 
 import game_objects.*;
+import gui.BoardPosition;
 import utilities.board_logic_utilities.*;
 
 import java.util.Stack;
 
-public abstract class Game {
+public abstract class  Game {
 
     private Board board;
     public AbstractPlayer currentPlayer;
@@ -13,28 +14,34 @@ public abstract class Game {
     private ArtificialPlayer bot;
 
     Game() {
-        this.setBoard((Board) GameObjectFactory.createInstance("Board"));
+        this.setBoard(new Board());
     }
 
     Game(AbstractPlayer currentPlayer) {
         this.setCurrentPlayer(currentPlayer);
         this.player = (currentPlayer instanceof Player)?
                 (Player)currentPlayer:
-                (Player)GameObjectFactory.createInstance("Player");
+                new Player();
         this.bot = (currentPlayer instanceof ArtificialPlayer)?
                 (ArtificialPlayer) currentPlayer :
-                (ArtificialPlayer) GameObjectFactory.createInstance("artificial player");
-        this.setBoard((Board) GameObjectFactory.createInstance("Board"));
+                new ArtificialPlayer(ArtificialPlayer.Difficulty.EASY);
+        this.setBoard(new Board());
     }
 
     public void movePiece(Move move) {
+        BoardPosition inital = new BoardPosition(move.getX1(), move.getY1());
+        BoardPosition target = new BoardPosition(move.getX2(), move.getY2());
+        boolean isWhite = GameContext.getBoard().isWhite(move.getX1(), move.getY1());
+
         if (move.isValid() && canMove()) {
-            Stack<Piece>[][] board = GameContext.getBoard().getBoard();
-            board[move.getX2()][move.getY2()].push(
-                    board[move.getY1()][move.getX1()].pop()
-            );
-            Board boardAfterMove = (Board) GameObjectFactory.createInstance("Board");
-            GameContext.setBoard(boardAfterMove);
+            GameContext.getBoard().getBoard()[move.getX2()][move.getY2()].push(
+                    GameContext.getBoard().getBoard()[move.getY1()][move.getX1()].pop());
+            if (isWhite) {
+            Board.incrementStackSize(target, isWhite);
+            } else {
+                Board.STACK_SIZE_BY_IDX_BLACK.put(new BoardPosition(move.getX1(), move.getY1()),
+                        GameContext.getBoard().getBoard()[move.getY1()][move.getX1()].size());
+            }
         }
     }
 
@@ -46,19 +53,27 @@ public abstract class Game {
         this.currentPlayer = (currentPlayer instanceof Player)? this.bot:this.player;
     }
 
-    AbstractPlayer getCurrentPlayer() {
+    public AbstractPlayer getCurrentPlayer() {
         return currentPlayer;
     }
 
-    Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    ArtificialPlayer getBot() {
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public ArtificialPlayer getBot() {
         return bot;
     }
 
-    Board getBoard() {
+    public void setBot(ArtificialPlayer bot) {
+        this.bot = bot;
+    }
+
+    public Board getBoard() {
         return board;
     }
 
