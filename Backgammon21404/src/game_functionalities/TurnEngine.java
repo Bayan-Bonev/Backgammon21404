@@ -3,11 +3,11 @@ package game_functionalities;
 import game_objects.AbstractPlayer;
 import game_objects.Player;
 import utilities.board_logic_utilities.Move;
-import java.util.Random;
 
 public class TurnEngine {
 
     private static final java.util.Random random = new java.util.Random();
+    private static final TurnEngine INSTANCE = new TurnEngine();
 
     public static Move currentMove;
     public static int[] dice;
@@ -59,6 +59,10 @@ public class TurnEngine {
 
     public boolean isOver() {
         return GameContext.getCurrentPlayer().getTakenOut().size() == 15;
+    }
+
+    public static TurnEngine getINSTANCE() {
+        return INSTANCE == null ? new TurnEngine() : INSTANCE;
     }
 
 }

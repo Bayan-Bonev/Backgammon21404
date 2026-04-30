@@ -9,6 +9,7 @@ public class GameContext {
     public static GameStrategy currentState;
 
     public GameContext(GameStrategy currentState) {
+        gameInstance = (Game)currentState;
         currentState = currentState;
     }
 
@@ -24,8 +25,7 @@ public class GameContext {
         }
     }
 
-    public static void movePiece(Move move) {
-        gameInstance.movePiece(move);
+    public static void movePiece(Move move) {gameInstance.movePiece(move);
     }
 
     public boolean canMove() {
@@ -42,6 +42,9 @@ public class GameContext {
 
     public static AbstractPlayer getCurrentPlayer() {
         return gameInstance.getCurrentPlayer();
+    }
+    public static void setCurrentPlayer(AbstractPlayer currentPlayer) {
+        gameInstance.setCurrentPlayer(currentPlayer);
     }
 
     public static Player getPlayer() {

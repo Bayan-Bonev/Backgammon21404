@@ -14,15 +14,15 @@ public class TablaStrategy extends Game implements GameStrategy {
     public void arrangeBoard() {
         Board board = new Board();
 
-        board.addPiece(true, 11, 0, 2, -1);
-        board.addPiece(true, 0, 0, 5, -1);
-        board.addPiece(true, 4, 1, 3, 1);
-        board.addPiece(true, 6, 1, 5, 1);
+        board.addPiece(true, 11, 0, 2);
+        board.addPiece(true, 0, 0, 5);
+        board.addPiece(true, 4, 1, 3);
+        board.addPiece(true, 6, 1, 5);
 
-        board.addPiece(false, 11, 1, 2, -1);
-        board.addPiece(false, 0, 1, 5, -1);
-        board.addPiece(false, 4, 0, 3, 1);
-        board.addPiece(false, 6, 0, 5, 1);
+        board.addPiece(false, 11, 1, 2);
+        board.addPiece(false, 0, 1, 5);
+        board.addPiece(false, 4, 0, 3);
+        board.addPiece(false, 6, 0, 5);
 
         this.setBoard(board);
     }
@@ -30,6 +30,11 @@ public class TablaStrategy extends Game implements GameStrategy {
     @Override
     public boolean isVulnerable(int x, int y) {
         return this.getBoard().isBlot(x, y) || this.getBoard().isEmpty(x, y);
+    }
+
+    @Override
+    public int determineDirection(boolean isWhite, int y) {
+        return (isWhite? 1:-1) * (y==0? 1:-1);
     }
 
     @Override

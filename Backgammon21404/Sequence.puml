@@ -1,0 +1,40 @@
+@startuml
+actor User
+participant Main
+participant GameInitializer
+participant StartMenu
+participant Engine
+participant TurnEngine
+participant GameContext
+participant ArtificialPlayer
+
+Main -> GameInitializer: initializeGameContext()
+GameInitializer -> StartMenu: new StartMenu()
+GameInitializer -> StartMenu: wait for user selection
+User -> StartMenu: select options, click "Start Game"
+StartMenu --> GameInitializer: selectedDifficulty, selectedColor, selectedGame
+GameInitializer -> GameContext: set game strategy (Tabla/Tapa/Giulbara)
+GameInitializer -> GameContext: setBot(new ArtificialPlayer(difficulty))
+Main -> Engine: gameLoop(gameFrame)
+loop until game over
+    Engine -> TurnEngine: new TurnEngine()
+    TurnEngine -> TurnEngine: rollDice()
+    alt currentPlayer is Player
+        TurnEngine -> User: wait for input
+        User -> InputListener: mousePressed, mouseDragged, mouseReleased
+        InputListener -> TurnEngine: set currentMove
+        TurnEngine -> GameContext: movePiece(currentMove)
+    else currentPlayer is ArtificialPlayer
+        TurnEngine -> ArtificialPlayer: play()
+        ArtificialPlayer -> MoveSimulator: simulatePossibleMoves()
+        MoveSimulator --> ArtificialPlayer: movesPerDie
+        ArtificialPlayer -> MoveEvaluator: evaluate(move)
+        MoveEvaluator --> ArtificialPlayer: riskRewardRatio
+        ArtificialPlayer --> TurnEngine: chosen Move
+        TurnEngine -> GameContext: movePiece(chosenMove)
+    end
+    TurnEngine -> GameContext: switchPlayer()
+    TurnEngine -> Engine: isOver()?
+end
+Engine -> Main: game over
+@enduml

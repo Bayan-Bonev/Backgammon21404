@@ -17,7 +17,7 @@ public class Engine {
 
             if (delta >= 1) {
                 // Update game state
-                TurnEngine turnEngine = new TurnEngine();
+                TurnEngine turnEngine = TurnEngine.getINSTANCE();
                 if (!turnEngine.isOver()) {
                     turnEngine.turn();
                 } else {

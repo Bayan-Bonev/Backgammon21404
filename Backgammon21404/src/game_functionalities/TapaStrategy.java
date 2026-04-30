@@ -13,9 +13,14 @@ public class TapaStrategy extends Game implements GameStrategy {
     @Override
     public void arrangeBoard() {
         Board board = new Board();
-        board.addPiece(true, 0, 0, 15, -1);
-        board.addPiece(true, 0, 1, 15, 1);
+        board.addPiece(true, 0, 0, 15);
+        board.addPiece(true, 0, 1, 15);
         GameContext.setBoard(board);
+    }
+
+    @Override
+    public int determineDirection(boolean isWhite, int y) {
+        return (y == 0) ? -1 : 1;
     }
 
     @Override

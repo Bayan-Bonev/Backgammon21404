@@ -9,9 +9,20 @@ public class GiulbaraStrategy extends Game implements GameStrategy {
     @Override
     public void arrangeBoard() {
         Board board = new Board();
-        board.addPiece(true, 11, 0, 15, -1);
-        board.addPiece(true, 0, 1, 15, -1);
+        board.addPiece(true, 11, 0, 15);
+        board.addPiece(true, 0, 1, 15);
         this.setBoard(board);
+    }
+
+    /*@Override
+    public void movePiece(int fromX, int fromY, int toX, int toY) {
+        this.getBoard().getByIdx(fromX, fromY).pop().setX(toX);
+        this.getBoard().getByIdx(fromX, fromY).pop().setY(toY);
+    }*/
+
+    @Override
+    public int determineDirection(boolean isWhite, int y) {
+        return (y == 0) ? -1 : 1 * (isWhite? 1:-1);
     }
 
     @Override

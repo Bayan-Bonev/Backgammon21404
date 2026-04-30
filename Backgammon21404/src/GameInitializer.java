@@ -1,7 +1,10 @@
 import game_functionalities.*;
+import game_objects.AbstractPlayer;
 import game_objects.ArtificialPlayer;
+import game_objects.Board;
 import game_objects.Player;
 import gui.StartMenu;
+import java.util.Arrays;
 
 public class GameInitializer {
 
@@ -43,7 +46,24 @@ public class GameInitializer {
 
         // Set the player's color
         boolean isWhite = selectedColor.equalsIgnoreCase("White");
-        Player player = new Player(true);
-        player.setWhite(isWhite);
+        GameContext.setPlayer(new Player(isWhite));
+        GameContext.currentState.arrangeBoard();
+
+        // Determine who plays first
+        determineFirstPlayer();
+    }
+
+    private static AbstractPlayer determineFirstPlayer() {
+        int playerDiceSum, botDiceSum;
+
+        do {
+            TurnEngine.rollDice();
+            playerDiceSum = Arrays.stream(TurnEngine.dice).sum();
+
+            TurnEngine.rollDice();
+            botDiceSum = Arrays.stream(TurnEngine.dice).sum();
+        } while (playerDiceSum == botDiceSum);
+
+        return (playerDiceSum > botDiceSum) ? GameContext.getPlayer() : GameContext.getBot();
     }
 }

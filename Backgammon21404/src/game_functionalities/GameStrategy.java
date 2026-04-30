@@ -8,5 +8,5 @@ public interface GameStrategy {
     void arrangeBoard();
     int[] getOuterBoardIndices(boolean isWhite);
     int[] getHomeBoardIndices(boolean isWhite);
-
+    int determineDirection(boolean isWhite, int y);
 }

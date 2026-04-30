@@ -34,7 +34,7 @@ public class Board implements IGameObject {
         this.board = new Stack[2][12];
     }
 
-    public void addPiece(boolean isWhite, int x, int y, int n, int direction) {
+    public void addPiece(boolean isWhite, int x, int y, int n) {
         for (int i = 0; i < n; i++) {
             this.board[y][x].push(new Piece(isWhite, x, y));
             if (isWhite) {

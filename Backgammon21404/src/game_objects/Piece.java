@@ -1,5 +1,7 @@
 package game_objects;
 
+import game_functionalities.GameContext;
+
 public class Piece {
 
     private final boolean isWhite;
@@ -12,13 +14,7 @@ public class Piece {
         this.isWhite = isWhite;
         this.x = x;
         this.y = y;
-        this.direction = findDirection();
-    }
-
-    private int findDirection() {
-        int colourFactor = isWhite? 1:-1;
-        int positionFactor = y==0? -1:1;
-        return (colourFactor * positionFactor);
+        setDirection();
     }
 
     public boolean isWhite() {
@@ -26,7 +22,7 @@ public class Piece {
     }
 
     public void setDirection() {
-        this.direction = findDirection();
+        this.direction = GameContext.currentState.determineDirection(isWhite, y);
     }
 
     public int getX() {
@@ -37,11 +33,11 @@ public class Piece {
         return this.y;
     }
 
-    void setX(int x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    void setY(int y) {
+    public void setY(int y) {
         this.y = y;
     }
 
