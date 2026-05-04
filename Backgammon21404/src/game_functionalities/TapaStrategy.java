@@ -11,11 +11,12 @@ public class TapaStrategy extends Game implements GameStrategy {
     }
 
     @Override
-    public void arrangeBoard() {
+    public Board arrangeBoard() {
         Board board = new Board();
         board.addPiece(true, 0, 0, 15);
         board.addPiece(true, 0, 1, 15);
         GameContext.setBoard(board);
+        return board;
     }
 
     @Override
@@ -24,8 +25,8 @@ public class TapaStrategy extends Game implements GameStrategy {
     }
 
     @Override
-    public boolean isVulnerable(int x, int y) {
-        return this.getBoard().isBlot(x, y) || this.getBoard().isEmpty(x, y);
+    public boolean isVulnerable(Board b, int x, int y) {
+        return b.isBlot(x, y) || this.getBoard().isEmpty(x, y);
     }
 
     @Override

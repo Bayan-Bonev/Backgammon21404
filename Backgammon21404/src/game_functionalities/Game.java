@@ -28,7 +28,7 @@ public abstract class  Game {
         this.setBoard(new Board());
     }
 
-    public void movePiece(Move move) {
+    public static void movePiece(Move move) {
         BoardPosition inital = new BoardPosition(move.getX1(), move.getY1());
         BoardPosition target = new BoardPosition(move.getX2(), move.getY2());
         boolean isWhite = GameContext.getBoard().isWhite(move.getX1(), move.getY1());
@@ -45,7 +45,7 @@ public abstract class  Game {
         }
     }
 
-    public boolean canMove() {
+    public static boolean canMove() {
         return (GameContext.getCurrentPlayer().capturedIsEmpty());
     }
 

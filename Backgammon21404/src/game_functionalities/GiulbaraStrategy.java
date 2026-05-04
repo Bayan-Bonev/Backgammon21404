@@ -1,24 +1,24 @@
 package game_functionalities;
 
 import game_objects.Board;
+import utilities.board_logic_utilities.Move;
 
-public class GiulbaraStrategy extends Game implements GameStrategy {
+public class GiulbaraStrategy implements GameStrategy {
 
     static GiulbaraStrategy INSTANCE;
 
     @Override
-    public void arrangeBoard() {
+    public Board arrangeBoard() {
         Board board = new Board();
         board.addPiece(true, 11, 0, 15);
         board.addPiece(true, 0, 1, 15);
-        this.setBoard(board);
+        return board;
     }
 
-    /*@Override
-    public void movePiece(int fromX, int fromY, int toX, int toY) {
-        this.getBoard().getByIdx(fromX, fromY).pop().setX(toX);
-        this.getBoard().getByIdx(fromX, fromY).pop().setY(toY);
-    }*/
+    public void movePiece(Move m) {
+        Board b = GameContext.getBoard();
+
+    }
 
     @Override
     public int determineDirection(boolean isWhite, int y) {
@@ -26,8 +26,8 @@ public class GiulbaraStrategy extends Game implements GameStrategy {
     }
 
     @Override
-    public boolean isVulnerable(int x, int y) {
-        return this.getBoard().isEmpty(x, y);
+    public boolean isVulnerable(Board board, int x, int y) {
+        return board.isEmpty(x, y);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class RiskCalculator extends MoveAgent {
         int openings = 0;
 
         for (int x = searchRadius[0]; x < searchRadius[1]; x++) {
-            if (GameContext.getState().isVulnerable(x, searchRadius[3])) {
+            if (GameContext.getState().isVulnerable(GameContext.getBoard(), x, searchRadius[3])) {
                 openings++;
             }
         }

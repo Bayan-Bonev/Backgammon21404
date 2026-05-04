@@ -1,16 +1,21 @@
 package game_functionalities;
 
+import config.GameConfiguration;
 import game_objects.*;
 import utilities.board_logic_utilities.Move;
 
 public class GameContext {
 
-    public static Game gameInstance;
+    public static GameState gameInstance;
     public static GameStrategy currentState;
 
-    public GameContext(GameStrategy currentState) {
-        gameInstance = (Game)currentState;
+    public GameContext(GameState gameInstance, GameStrategy currentState) {
+        gameInstance = gameInstance;
         currentState = currentState;
+    }
+
+    public GameContext GameContext(GameConfiguration config) {
+        return new GameContext(new GameState(config), config.getVariant());
     }
 
     public GameStrategy getCurrentState() {
@@ -23,9 +28,6 @@ public class GameContext {
         else {
             return TapaStrategy.getINSTANCE();
         }
-    }
-
-    public static void movePiece(Move move) {gameInstance.movePiece(move);
     }
 
     public boolean canMove() {
@@ -63,5 +65,8 @@ public class GameContext {
 
     public static GameStrategy getState() {
         return currentState;
+    }
+    public static void setCurrentState(GameStrategy currentState) {
+        GameContext.currentState = currentState;
     }
 }

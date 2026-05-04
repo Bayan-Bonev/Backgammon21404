@@ -2,7 +2,7 @@ package game_functionalities;
 
 import game_objects.Board;
 
-public class TablaStrategy extends Game implements GameStrategy {
+public class TablaStrategy implements GameStrategy {
 
     static TablaStrategy INSTANCE;
 
@@ -11,7 +11,7 @@ public class TablaStrategy extends Game implements GameStrategy {
     }
 
     @Override
-    public void arrangeBoard() {
+    public Board arrangeBoard() {
         Board board = new Board();
 
         board.addPiece(true, 11, 0, 2);
@@ -24,12 +24,12 @@ public class TablaStrategy extends Game implements GameStrategy {
         board.addPiece(false, 4, 0, 3);
         board.addPiece(false, 6, 0, 5);
 
-        this.setBoard(board);
+        return board;
     }
 
     @Override
-    public boolean isVulnerable(int x, int y) {
-        return this.getBoard().isBlot(x, y) || this.getBoard().isEmpty(x, y);
+    public boolean isVulnerable(Board board, int x, int y) {
+        return board.isBlot(x, y) || board.isEmpty(x, y);
     }
 
     @Override

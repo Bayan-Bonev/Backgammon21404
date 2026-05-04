@@ -1,11 +1,13 @@
 package game_functionalities;
 
-import java.util.HashMap;
+import game_objects.Board;
+
+import utilities.board_logic_utilities.Move;
 
 public interface GameStrategy {
 
-    boolean isVulnerable(int x, int y);
-    void arrangeBoard();
+    boolean isVulnerable(Board board, int x, int y);
+    Board arrangeBoard();
     int[] getOuterBoardIndices(boolean isWhite);
     int[] getHomeBoardIndices(boolean isWhite);
     int determineDirection(boolean isWhite, int y);

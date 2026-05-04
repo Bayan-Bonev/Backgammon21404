@@ -16,7 +16,7 @@ public class MoveValidator extends MoveAgent {
 
         return (!GameContext.getBoard().isEmpty(x1, y1)
                 && currentPlayerIsWhite == GameContext.getBoard().isWhite(x1, y1)
-                && (super.getState().isVulnerable(x2, y2)
+                && (super.getState().isVulnerable(GameContext.getBoard(), x2, y2)
                 || currentPlayerIsWhite == GameContext.getBoard().isWhite(x2, y2)));
     }
 }

@@ -27,7 +27,7 @@ public class MoveEvaluator extends MoveAgent{
         ArrayList<Piece> blots = new ArrayList<>();
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 12; x++) {
-                if (!(board.isEmpty(x, y)) && currentState.isVulnerable(x, y) && isWhite) {
+                if (!(board.isEmpty(x, y)) && currentState.isVulnerable(GameContext.getBoard(), x, y) && isWhite) {
                     blots.add(board.getByIdx(x, y).peek());
                 }
             }

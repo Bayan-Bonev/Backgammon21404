@@ -1,9 +1,9 @@
 package gui;
 
+import game_functionalities.GameState;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GameFrame extends JFrame {
 
@@ -12,7 +12,11 @@ public class GameFrame extends JFrame {
 
     static final ImageIcon BOARD_SPRITE = new ImageIcon("Backgammon21404/sprites/backgammon_board.png");
 
-    public GameFrame() {
+    private final GameState gameState;
+
+    public GameFrame(GameState gameState) {
+        this.gameState = gameState; // Store the GameState instance
+
         setTitle("Backgammon");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,5 +60,4 @@ public class GameFrame extends JFrame {
 
         setVisible(true);
     }
-    
 }

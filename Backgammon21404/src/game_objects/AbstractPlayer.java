@@ -1,10 +1,9 @@
 package game_objects;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public abstract class AbstractPlayer implements IGameObject {
+public abstract class AbstractPlayer {
 
     private static final Random random = new Random();
 

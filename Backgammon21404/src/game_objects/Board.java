@@ -1,14 +1,11 @@
 package game_objects;
 
-import game_functionalities.GameContext;
-import game_functionalities.GameStrategy;
 import gui.BoardPosition;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
-public class Board implements IGameObject {
+public class Board {
 
     public static final HashMap<BoardPosition, Integer> STACK_SIZE_BY_IDX_WHITE = new HashMap<>();
     public static final HashMap<BoardPosition, Integer> STACK_SIZE_BY_IDX_BLACK = new HashMap<>();

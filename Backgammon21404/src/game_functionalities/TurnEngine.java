@@ -31,7 +31,7 @@ public class TurnEngine {
         while (turnsLeft > 0) {
             try {
                 if (currentPlayer instanceof Player && currentPlayer != null) {
-                    GameContext.movePiece(currentMove);
+                    Game.movePiece(currentMove);
                 }
                 else {
                     GameContext.getBot().play();
@@ -42,7 +42,9 @@ public class TurnEngine {
                 System.out.println(e.getMessage());
             }
         }
-        GameContext.gameInstance.switchPlayer();
+        GameContext.setCurrentPlayer(
+                (currentPlayer instanceof Player) ? GameContext.getBot() : GameContext.getPlayer()
+        );
     }
 
     private void waitForUserMove(Move m) {
